@@ -25,13 +25,10 @@ jobs:
           node-version: 14
 
       - name: Fetch WorkHub-UI release
-        uses: dsaltares/fetch-gh-release-asset@master
+        uses: suisei-cn/actions-download-file@v1
         with: 
-          repo: "WorkerHive/React-WorkerHub"
-          version: "v0.0.2"
-          file: "webui.zip"
-
-      - run: cd webui && mv ../webui.zip .
+          url: "https://github.com/WorkerHive/React-WorkerHub/releases/download/v0.0.2/webui.zip"
+          target: webui/
 
       - name: Build/release Electron app
         uses: samuelmeuli/action-electron-builder@v1
