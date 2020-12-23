@@ -6,15 +6,19 @@ const isDev = require('electron-is-dev')
 let win;
 
 function createWindow(){
-  win = new BrowserWindow({width: 800, height: 600,     webPreferences: {
-      nodeIntegration: true
-    }})
+  win = new BrowserWindow({
+      width: 800,
+      height: 600,
+      icon: path.join(__dirname, '/icons/png/128x128.png'),
+      webPreferences: {
+        nodeIntegration: true
+      }})
   
   //Show app
   console.log(fs.readdirSync(path.join(__dirname)))
   win.loadURL(isDev? "http://localhost:3000": `file://${path.join(__dirname, "../webui/build/index.html")}`);
   
-  win.webContents.openDevTools()
+//  win.webContents.openDevTools()
 
 }
 

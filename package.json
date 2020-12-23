@@ -42,14 +42,17 @@
   },
   "build": {
     "appId": "services.workhub.desktop",
-    "icon": "teal.png",
+    "icon": "icons/png/256x256.png",
     "files": [
       "webui/build/**/*",
       "node_modules/**/*",
-      "public/*"
+      "public/**/*"
     ],
+    "mac": {
+      "icon": "icons/mac/icon.icns"
+    },
     "linux": {
-      "icon": "teal.png"
+      "icon": "icons/png/256x256.png"
     },
     "directories": {
       "buildResources": "assets"
@@ -72,6 +75,7 @@
     "concurrently": "^5.3.0",
     "electron": "^11.0.3",
     "electron-builder": "^22.9.1",
+    "electron-icon-maker": "^0.0.5",
     "wait-on": "^5.2.0"
   }
 }
