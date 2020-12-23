@@ -1,6 +1,7 @@
 const { app, BrowserWindow } = require('electron')
-const IPFS = require('ipfs')
-const { startNode, listenForPeers } = require('../lib/p2p-wrench')
+const fs = require('fs');
+const path = require('path');
+const isDev = require('electron-is-dev')
 
 let win;
 
@@ -10,7 +11,9 @@ function createWindow(){
     }})
   
   //Show app
-  win.loadURL("http://localhost:3000")  
+  console.log(fs.readdirSync(path.join(__dirname)))
+  win.loadURL(isDev? "http://localhost:3000": `file://${path.join(__dirname, "../webui/build/index.html")}`);
+  
   win.webContents.openDevTools()
 
 }
@@ -20,29 +23,13 @@ app.on('ready', async () => {
  
   createWindow()
 
-  let node = await startNode()
-
-  listenForPeers(node, (peer) => {
-    peers.push(peer)
-    console.log(peers)
-    win.webContents.send('devices-found', [peer])
-  })
   try{
-    const node = await IPFS.create({
-      config: {
-        Addresses: {
-          Swarm: ['/ip4/0.0.0.0/tcp/0', '/ip4/0.0.0.0/tcp/0/ws']
-        }
-      }
-    })
-    const id = await node.id()
-    
+
     win.webContents.on('did-finish-load', () => {
       console.log("FINISHED LOAD", peers)     
       win.webContents.send('devices-found', peers)
     })
 
-    console.log(id)
   }catch(err) {
     console.error(err)
   }

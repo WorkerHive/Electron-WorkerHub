@@ -3,13 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "./",
-  "main": "public/main.js",
+  "description": "Workhub Desktop Client",
+  "author": "The Tech Company",
+  "main": "public/electron.js",
   "dependencies": {
     "@material-ui/core": "^4.11.1",
     "@material-ui/icons": "^4.9.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "cross-env": "^7.0.3",
+    "electron-is-dev": "^1.2.0",
     "ipfs": "^0.52.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -18,9 +22,15 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron .\"",
+    "build": "yarn react-install && yarn react-build",
+    "react-install": "cd webui && yarn install",
+    "react-start": "cd webui && react-scripts start",
+    "react-build": "cd webui && react-scripts build",
     "electron-start": "electron .",
+    "electron-build": "electron-builder",
+    "electron-pack": "electron-builder build",
+    "prelectron-pack": "cd webui && yarn build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -29,6 +39,22 @@
       "react-app",
       "react-app/jest"
     ]
+  },
+  "build": {
+    "appId": "services.workhub.desktop",
+    "icon": "teal.png",
+    "files": [
+      "webui/build/**/*",
+      "node_modules/**/*",
+      "public/*"
+    ],
+    "linux": {
+      "icon": "teal.png"
+    },
+    "directories": {
+      "buildResources": "assets"
+    },
+    "extends": null
   },
   "browserslist": {
     "production": [
@@ -43,7 +69,9 @@
     ]
   },
   "devDependencies": {
+    "concurrently": "^5.3.0",
     "electron": "^11.0.3",
-    "electron-builder": "^22.9.1"
+    "electron-builder": "^22.9.1",
+    "wait-on": "^5.2.0"
   }
 }
