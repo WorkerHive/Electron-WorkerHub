@@ -27,7 +27,7 @@ jobs:
       - name: Fetch WorkHub-UI release
         uses: suisei-cn/actions-download-file@v1
         with: 
-          url: "https://github.com/WorkerHive/React-WorkerHub/releases/download/v0.0.2/webui.zip"
+          url: "https://github.com/WorkerHive/React-WorkerHub/releases/download/v0.0.3/webui.zip"
           target: webui/
 
       - name: Build/release Electron app
