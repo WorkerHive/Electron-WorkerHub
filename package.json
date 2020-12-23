@@ -23,7 +23,7 @@
   },
   "scripts": {
     "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron .\"",
-    "build": "yarn react-install && yarn react-build",
+    "build": "cd webui && unzip webui.zip",
     "react-install": "cd webui && yarn install",
     "react-start": "cd webui && react-scripts start",
     "react-build": "cd webui && react-scripts build",
