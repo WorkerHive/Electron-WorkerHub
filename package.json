@@ -48,6 +48,7 @@
       "node_modules/**/*",
       "public/**/*"
     ],
+    "publish": ["github"],
     "mac": {
       "icon": "icons/mac/icon.icns"
     },
