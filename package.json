@@ -45,7 +45,7 @@
       "target": "dmg",
       "icon": "icons/mac/icon.icns"
     },
-    "windows": {
+    "win": {
       "target": "msi"
     },
     "linux": {
