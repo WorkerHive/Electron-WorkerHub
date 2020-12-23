@@ -42,9 +42,14 @@
       "github"
     ],
     "mac": {
+      "target": "dmg",
       "icon": "icons/mac/icon.icns"
     },
+    "windows": {
+      "target": "msi"
+    },
     "linux": {
+      "target": "AppImage",
       "icon": "icons/png/256x256.png"
     },
     "directories": {
